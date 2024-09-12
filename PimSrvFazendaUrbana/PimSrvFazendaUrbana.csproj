@@ -124,6 +124,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cartao.cs" />
+    <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\Endereco.cs" />
+    <Compile Include="Models\Enums\Categoria.cs" />
+    <Compile Include="Models\Enums\Funcao.cs" />
+    <Compile Include="Models\Enums\Status.cs" />
+    <Compile Include="Models\Fazenda.cs" />
+    <Compile Include="Models\Funcionario.cs" />
+    <Compile Include="Models\Pedido.cs" />
+    <Compile Include="Models\Pessoa.cs" />
+    <Compile Include="Models\Plantio.cs" />
+    <Compile Include="Models\Produto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -180,7 +192,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

@@ -4,36 +4,144 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="~/Content/toastr.css" rel="stylesheet" /> <!-- Adicionado Toastr CSS -->
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
+<style>
+    .sidebar {
+        border: 2px solid #ccc;
+        width: 250px;
+        background-color: white;
+        color: blue;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .sidebar a {
+            position: center;
+            left: 20px;
+            text-decoration: none;
+            color: black;
+            padding: 5px;
+            margin: 5px 0;
+            display: block;
+        }
+
+            .sidebar a:hover {
+                background-color: #575757;
+                border-radius: 5px;
+            }
+
+    .sair {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        color: red;
+        text-decoration: none;
+        border-radius: 5px;
+        border: 2px solid red;
+    }
+
+        .sair i {
+            color: red;
+            margin-right: 150px;
+        }
+
+    body {
+        background-color: #E7F0EB;
+    }
+
+    .perfil {
+        padding-bottom: 10px;
+        border-bottom: 2px solid #ccc;
+        margin-bottom: 20px;
+    }
+</style>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                </ul>
-            </div>
+
+    <div class="barra"></div>
+
+    <aside class="sidebar">
+        <div class="perfil">
+            @if (Session["ClienteNome"] != null)
+            {
+                <i class="fas fa-user fa-3x"></i>
+                <span>@Session["ClienteNome"]</span>
+            }
+            else
+            {
+                <a href="@Url.Action("Login", "Clientes")">
+                    <i class="fas fa-user fa-3x"></i>
+                    <span>Login</span>
+                </a>
+            }
         </div>
-    </nav>
-    <div class="container body-content">
+
+        <ul class="nav flex-column">
+            <li>
+                <a href="@Url.Action("Index", "Home")">
+                    <i class="fas fa-home"></i> Início
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Produtos")">
+                    <i class="fas fa-box"></i> Produtos
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Cart")">
+                    <i class="fas fa-shopping-cart"></i> Carrinho
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Orders", "Account")">
+                    <i class="fas fa-receipt"></i> Minhas Compras
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Reviews", "Account")">
+                    <i class="fas fa-star"></i> Avaliações
+                </a>
+            </li>
+        </ul>
+
+        <a class="sair" href="@Url.Action("Logout", "Clientes")">
+            <i class="fas fa-sign-out-alt"></i> Sair
+        </a>
+    </aside>
+
+    <div class="barra"></div>
+
+    <div style="margin-left: 270px; padding: 20px;">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <!-- Scripts do Toastr -->
+    <script src="~/Scripts/toastr.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <text>toastr.success('@TempData["SuccessMessage"]');</text>
+            }
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,96 @@
+﻿@model IEnumerable<PimSrvFazendaUrbana.Models.Produto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Produtos</title>
+    <style>
+        .container {
+            display: flex; /* Usamos flexbox para alinhar os produtos e o carrinho lado a lado */
+        }
+
+        .produto-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Limitar a 3 produtos por linha */
+            grid-gap: 20px; /* Espaçamento entre os itens */
+            justify-items: center; /* Alinha os itens no centro */
+            padding: 20px;
+            flex-grow: 1; /* Faz o container de produtos ocupar o espaço disponível */
+        }
+
+        .produto-item {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            width: 150px; /* Largura fixa para cada produto */
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+            .produto-item img {
+                width: 100px;
+                height: 100px;
+                object-fit: cover; /* Ajusta a imagem para cobrir o espaço sem distorcer */
+            }
+
+            .produto-item a {
+                text-decoration: none;
+                color: black;
+            }
+
+                .produto-item a:hover {
+                    color: #70CF96; /* Cor ao passar o mouse */
+                }
+
+        .carrinho-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 250px;
+            margin-left: 20px; /* Espaçamento entre produtos e carrinho */
+            position: sticky; /* Torna o carrinho fixo na página */
+            top: 20px; /* Mantém o carrinho fixo 20px a partir do topo da página */
+            height: fit-content;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <p><big><b>Produtos</b></big></p>
+    <div class="container">
+        <div class="produto-container">
+            @foreach (var item in Model)
+            {
+                <div class="produto-item">
+                    <a href="/Produtos/Details/@item.Id">
+                        <h3>@item.Nome</h3>
+                        <img src="@item.Image" alt="@item.Nome">
+                        <p>R$ @item.Preco</p>
+                    </a>
+                </div>
+            }
+        </div>
+
+        <div class="carrinho-container">
+            <!-- Conteúdo do carrinho -->
+            <h3>Carrinho</h3>
+            <!-- Exemplo de item do carrinho -->
+            
+            <!-- Adicionar mais itens -->
+        </div>
+    </div>
+
+
+
+</body>
+</html>

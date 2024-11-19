@@ -13,7 +13,7 @@ namespace PimSrvFazendaUrbana.Models
         public Funcao Funcao { get; set; }
         public int FazendaId { get; set; }
 
-        public Funcionario(int id, string nome, string cpf, string cnpj, DateTime dataNascimento, string celular, string email, string senha) : base(id, nome, cpf, cnpj, dataNascimento, celular, email, senha)
+        public Funcionario(int id, string nome, string cpf, string cnpj, DateTime dataNascimento, string celular, string email, string senha) : base(nome, cpf, cnpj, dataNascimento, celular, email, senha)
         {
         }
 

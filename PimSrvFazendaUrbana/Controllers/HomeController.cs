@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PimSrvFazendaUrbana.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,17 @@ namespace PimSrvFazendaUrbana.Controllers
 {
     public class HomeController : Controller
     {
+
+        private readonly ProdutoService _produtoService;
+
+        public HomeController() { 
+            _produtoService = new ProdutoService();
+        }
+
         public ActionResult Index()
         {
-            return View();
+            
+            return RedirectToAction("Index", "Produtos");
         }
 
         public ActionResult About()

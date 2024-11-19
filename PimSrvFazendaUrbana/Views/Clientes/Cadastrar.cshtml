@@ -1,0 +1,206 @@
+﻿@model PimSrvFazendaUrbana.Models.Cliente
+
+@{
+    Layout = null; // Define que a página não usa o layout padrão da aplicação
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semente Verde - Cadastro</title>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
+
+    <!-- Incluindo Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+
+    <style>
+        /* Estilos customizados para o layout de login */
+        .login-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .login-left {
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+        }
+
+        .login-right {
+            background-color: #6FCF97;
+            color: white;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+            .login-right h2 {
+                font-weight: bold;
+                font-size: 28px;
+                margin-top: 20px;
+            }
+
+        .login-form {
+            width: 100%;
+            max-width: 320px;
+        }
+
+            .login-form .form-group input {
+                background-color: transparent;
+                border: 2px solid #fff;
+                border-radius: 25px;
+                padding: 10px 20px;
+                color: white;
+            }
+
+            .login-form .btn {
+                background-color: #fff;
+                color: #6FCF97;
+                border-radius: 25px;
+                padding: 10px 30px;
+            }
+
+            .login-form a {
+                color: white;
+                text-decoration: underline;
+            }
+
+        .login-logo img {
+            width: 350px;
+        }
+
+        .login-logo h1 {
+            font-family: 'Cursive';
+            color: #6FCF97;
+        }
+
+        /* Estilo para a mensagem de erro */
+        .error-message {
+            background-color: rgba(255, 0, 0, 0.1);
+            color: red;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        /* Estilo para os links de navegação "Cadastro" e "Login" */
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px; /* Espaçamento entre os links e o título */
+        }
+
+            .nav-links a {
+                color: white;
+                margin: 0 10px;
+                font-weight: bold;
+                text-decoration: none;
+            }
+
+                .nav-links a:hover {
+                    text-decoration: underline;
+                }
+
+        .two-inputs .form-group {
+            display: flex;
+            gap: 10px;
+        }
+
+            .two-inputs .form-group .form-control {
+                width: 50%;
+            }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- Lado Esquerdo - Logo -->
+        <div class="login-left">
+            <div class="login-logo">
+                <img src="~/Content/Images/Captura de tela 2024-10-21 204048.png" />
+            </div>
+        </div>
+
+        <!-- Lado Direito - Formulário de Cadastro -->
+        <div class="login-right">
+            <div class="nav-links">
+                <a href="@Url.Action("Cadastrar", "Clientes")" class="active">Cadastro</a>
+                <a href="@Url.Action("Login", "Clientes")">Login</a>
+            </div>
+            <h2>Faça o seu cadastro aqui!</h2>
+
+            <!-- Formulário de Cadastro -->
+            @using (Html.BeginForm("Cadastrar", "Clientes", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="login-form">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Nome, "Nome Completo", new { @class = "sr-only" })
+                        @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", placeholder = "Nome Completo" })
+                        @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.Cpf, "CPF", new { @class = "sr-only" })
+                            @Html.TextBoxFor(m => m.Cpf, new { @class = "form-control", placeholder = "CPF" })
+                            @Html.ValidationMessageFor(m => m.Cpf, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(m => m.DataNascimento, "Data de Nascimento", new { @class = "sr-only" })
+                            @Html.TextBoxFor(m => m.DataNascimento, new { @class = "form-control", placeholder = "Data de Nascimento", type = "date" })
+                            @Html.ValidationMessageFor(m => m.DataNascimento, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Celular, "Número de Telefone", new { @class = "sr-only" })
+                        @Html.TextBoxFor(m => m.Celular, new { @class = "form-control", placeholder = "Número de Telefone" })
+                        @Html.ValidationMessageFor(m => m.Celular, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, "E-mail", new { @class = "sr-only" })
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "E-mail" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Senha, "Senha", new { @class = "sr-only" })
+                        @Html.PasswordFor(m => m.Senha, new { @class = "form-control", placeholder = "Senha" })
+                        @Html.ValidationMessageFor(m => m.Senha, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <input id="cadastro" type="submit" value="CONTINUAR" class="btn btn-primary btn-block" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        $(function () {
+            $("cadastro").click(function ()){
+                alert("Sucesso");
+                toastr.click("Sucesso");
+            }
+        });
+    </script>
+}

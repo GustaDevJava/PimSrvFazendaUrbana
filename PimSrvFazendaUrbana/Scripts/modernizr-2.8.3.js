@@ -539,7 +539,7 @@ window.Modernizr = (function( window, document, undefined ) {
         // Same as rgba(), in fact, browsers re-map hsla() to rgba() internally,
         //   except IE9 who retains it as hsla
 
-        setCss('background-color:hsla(120,40%,100%,.5)');
+        setCss('background-color:hsla(150, 27%, 93%, 1)');
 
         return contains(mStyle.backgroundColor, 'rgba') || contains(mStyle.backgroundColor, 'hsla');
     };

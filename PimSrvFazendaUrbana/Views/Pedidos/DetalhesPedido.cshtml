@@ -1,0 +1,38 @@
+﻿@model PimSrvFazendaUrbana.Models.Pedido
+
+@{
+    ViewBag.Title = "Detalhes do Pedido";
+}
+
+<h2>Detalhes do Pedido</h2>
+
+<div>
+    <h3>Pedido #@Model.Id</h3>
+    <p><strong>Cliente ID:</strong> @Model.ClienteId</p>
+    <p><strong>Total:</strong> R$ @Model.Total</p>
+    <p><strong>Desconto:</strong> R$ @Model.Desconto</p>
+    <p><strong>Cupom:</strong> @Model.Cupom</p>
+</div>
+
+<h4>Produtos no Pedido</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Carrinhos)
+        {
+            <tr>
+                <td>@item.Produto.Nome</td>
+                <td>R$ @item.Produto.Preco</td>
+                <td>@item.Produto.Quantidade</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Index", "Pedido")" class="btn btn-primary">Voltar</a>
